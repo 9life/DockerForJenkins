@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
-WORKDIR /Docker-working
+WORKDIR /HelloWorldMicrosoftExample
 
 # Copy everything
 COPY . ./
@@ -10,6 +10,6 @@ RUN dotnet publish -c Release -o out
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
-WORKDIR /Docker-working
-COPY --from=build-env /Docker-working/out .
+WORKDIR /HelloWorldMicrosoftExample
+COPY --from=build-env /HelloWorldMicrosoftExample/out .
 ENTRYPOINT ["dotnet", "Docker-working.dll"]
